@@ -43,6 +43,15 @@ export const Margin = {
   marginDefaul: 10,
 };
 
+export const GenerateColor = () => {
+  let color = Math.floor(Math.random() * 16777215).toString(16);
+  let colorRegEx = new RegExp('^#([a-fA-F0-9]){3}$|[a-fA-F0-9]{6}$');
+  if (colorRegEx.test(color)) {
+    return `#${color}`;
+  }
+  GenerateColor();
+};
+
 export const DoughnutColor = [
   '#a1c389',
   '#765faf',
@@ -51,7 +60,6 @@ export const DoughnutColor = [
   ColorsPallete.orange[700],
   '#351c75',
   '#a28250',
-  `#${Math.floor(Math.random() * 16777215).toString(16)}`,
   `#${Math.floor(Math.random() * 16777215).toString(16)}`,
   `#${Math.floor(Math.random() * 16777215).toString(16)}`,
   `#${Math.floor(Math.random() * 16777215).toString(16)}`,

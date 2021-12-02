@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Svg, { Circle, G, Text } from 'react-native-svg';
-import { DoughnutColor } from '../../styles/global';
+import { GenerateColor } from '../../styles/global';
 export function DoughnutSVG({ assetsList }) {
   const [balance, setBalance] = useState('0');
   const [bitcoinBalance, setBitcoinBalance] = useState('0');
@@ -49,7 +49,7 @@ export function DoughnutSVG({ assetsList }) {
           cy={21}
           r={15.915}
           fill="transparent"
-          stroke={DoughnutColor[index]}
+          stroke={GenerateColor()}
           strokeWidth={1}
           strokeDasharray={
             isFinite(percent) ? `${percent} ${100 - Number(percent)}` : 0
