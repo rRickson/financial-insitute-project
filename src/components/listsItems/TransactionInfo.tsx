@@ -7,13 +7,37 @@ import { LoansStatus } from '../../data/loan';
 import { formatDate } from '../../utils/RequestUtil';
 
 export function TransactionInfo({ item }) {
+  const checkStatus = component => {
+    switch (item.status) {
+      case 0:
+        switch (component) {
+          case 'touchable':
+            return style.pendingButton;
+          default:
+            return style.pendingButtonText;
+        }
+      case 1:
+        switch (component) {
+          case 'touchable':
+            return style.paidButton;
+          default:
+            return style.paidButtonText;
+        }
+      case 2:
+      case 3:
+        switch (component) {
+          case 'touchable':
+            return style.payNowButton;
+          default:
+            return style.payNowButtonText;
+        }
+    }
+  };
   return (
     <>
       <View style={style.mainContainer}>
         <View style={style.iconContainer}>
-          <View
-            style={[style.icon, item.type === 0 ? style.income : style.debit]}
-          >
+          <View style={style.icon}>
             <Icon
               name={item.type === 0 ? 'caret-up-outline' : 'caret-down-outline'}
               type="ionicon"
@@ -40,17 +64,10 @@ export function TransactionInfo({ item }) {
         </View>
         <View style={style.statusContainer}>
           <TouchableOpacity
-            disabled={item.status !== 2 ? true : false}
-            style={[
-              style.statusButton,
-              item.status === 2
-                ? style.payNowButton
-                : item.status === 0
-                ? style.pendingButton
-                : style.paidButton,
-            ]}
+            disabled={item.status !== 2 && item.status !== 3 ? true : false}
+            style={[style.statusButton, checkStatus('touchable')]}
           >
-            <Text>
+            <Text style={checkStatus('text')}>
               {item.status === 2 ? 'Pay Now' : LoansStatus[item.status]}
             </Text>
           </TouchableOpacity>
@@ -81,12 +98,7 @@ const style = StyleSheet.create({
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  income: {
-    backgroundColor: ColorsPallete.green[100],
-  },
-  debit: {
-    backgroundColor: ColorsPallete.red[100],
+    backgroundColor: '#fff',
   },
   information: {
     flexDirection: 'column',
@@ -123,22 +135,32 @@ const style = StyleSheet.create({
     marginBottom: 5,
   },
   statusButton: {
-    borderColor: '#fff',
-    borderWidth: 1,
+    borderWidth: 2,
     width: '100%',
     height: 50,
     borderRadius: 15,
     padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#fff',
   },
+
   paidButton: {
-    backgroundColor: ColorsPallete.green[100],
+    borderColor: ColorsPallete.green[900],
   },
   payNowButton: {
-    backgroundColor: ColorsPallete.red[100],
+    borderColor: ColorsPallete.red[500],
   },
   pendingButton: {
-    backgroundColor: ColorsPallete.blueGrey[50],
+    borderColor: ColorsPallete.blueGrey[500],
+  },
+  paidButtonText: {
+    color: ColorsPallete.green[900],
+  },
+  payNowButtonText: {
+    color: ColorsPallete.red[500],
+  },
+  pendingButtonText: {
+    color: ColorsPallete.blueGrey[500],
   },
 });
