@@ -14,7 +14,7 @@ const buttonList = [
 ];
 const feature = {
   headline: 'PAY WITHIN 12 MONTHS',
-  caption: 'LOANS TO CRYPT UP TO',
+  caption: 'LOANS TO CRYPTO UP TO',
   price: '$50,000',
 };
 
