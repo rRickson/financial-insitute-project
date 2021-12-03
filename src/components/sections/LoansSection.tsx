@@ -3,18 +3,18 @@ import { StyleSheet, View } from 'react-native';
 import { CardFeature } from '../../assets/images/svg/cardFeature';
 import { ColorsPallete } from '../../assets/styles/ColorsPallete';
 import { Margin } from '../../assets/styles/global';
-import { cryptoList } from '../../data/crypto';
+import { loansList } from '../../data/loan';
 import { MainButton } from '../buttons/mainButton';
 import { SectionButtons } from '../buttons/sectionButtons';
-import { CryptoInfo } from '../listsItems/CryptoInfo';
+import { TransactionInfo } from '../listsItems/TransactionInfo';
 
 const buttonList = [
-  { name: 'Request Loan', icon: 'arrow-down-left' },
+  { name: 'Credit Review', icon: 'dollar-sign' },
   { name: 'Invoice', icon: 'arrow-up-right' },
 ];
 const feature = {
   headline: 'PAY WITHIN 12 MONTHS',
-  caption: 'UP TO',
+  caption: 'LOANS TO CRYPT UP TO',
   price: '$50,000',
 };
 
@@ -26,9 +26,13 @@ export function LoansSection({ openFeature }) {
     });
   };
 
-  const renderList = () => {
-    return cryptoList.map(item => {
-      return <CryptoInfo item={item} key={item.id} />;
+  const renderLoanList = () => {
+    const sorted = loansList.sort(
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+    );
+
+    return sorted.map(item => {
+      return <TransactionInfo item={item} key={item.id} />;
     });
   };
 
@@ -47,7 +51,7 @@ export function LoansSection({ openFeature }) {
           action={openFeature}
         />
       </View>
-      {/* <View style={style.cryptoList}>{renderList()}</View> */}
+      <View style={style.cryptoList}>{renderLoanList()}</View>
     </View>
   );
 }
