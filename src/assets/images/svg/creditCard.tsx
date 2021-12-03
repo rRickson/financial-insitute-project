@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import Svg, { LinearGradient, Stop, Path, G, Text } from 'react-native-svg';
-/* SVGR has dropped some elements not supported by react-native-svg: style */
 
 export function CreditCardSvg({ card }) {
   return (
@@ -50,10 +49,6 @@ export function CreditCardSvg({ card }) {
           <Stop offset={0.849} stopColor="#d7d7d7" />
           <Stop offset={0.887} stopColor="#fff" />
         </LinearGradient>
-        {/* <Path
-          d="M192.39 3.5H54.57l72.55 122.1h65.27c4.14 0 7.5-3.36 7.5-7.5V11c0-4.14-3.35-7.5-7.5-7.5z"
-          fill="url(#prefix__SVGID_00000146500422770288305270000010736989129162041990_)"
-        /> */}
         <LinearGradient
           id="prefix__SVGID_00000067915632200945909820000014186707184992194437_"
           gradientUnits="userSpaceOnUse"

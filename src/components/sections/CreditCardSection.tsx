@@ -25,12 +25,6 @@ export function CreditCardSection() {
 
   return (
     <View style={style.mainContainer}>
-      {/* <View style={style.headerContainer}>
-        <View style={style.valuesSection}>
-          <Text style={style.currenciesValue}>{'$ 64,900.26'}</Text>
-          <Text style={style.cryptoValue}>{'BTC = $64,900.26'}</Text>
-        </View>
-      </View> */}
       <CreditCardCarousel />
       <View style={style.listSection}>
         <GroupButtons
