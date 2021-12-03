@@ -21,8 +21,8 @@ export function TransactionInfo({ item }) {
               tvParallaxProperties={undefined}
               iconStyle={
                 item.type === 0
-                  ? style.possitiveProgression
-                  : style.negativeProgression
+                  ? style.incomeTransactionText
+                  : style.debitTransactionText
               }
             />
           </View>
@@ -71,10 +71,6 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 5,
   },
-  listItem: {
-    borderRadius: 40,
-    backgroundColor: ColorsPallete.blueGrey[50],
-  },
   iconContainer: {
     flexDirection: 'row',
     width: '40%',
@@ -99,6 +95,7 @@ const style = StyleSheet.create({
   },
   infomrationText: {
     color: '#fff',
+    fontWeight: '600',
   },
   priceContainer: {
     width: '30%',
@@ -112,16 +109,13 @@ const style = StyleSheet.create({
     flex: 1,
     alignItems: 'flex-end',
   },
-  possitiveProgression: {
+  incomeTransactionText: {
     color: ColorsPallete.green[500],
     fontWeight: '700',
   },
-  negativeProgression: {
+  debitTransactionText: {
     color: ColorsPallete.red[500],
     fontWeight: '700',
-  },
-  percentContainer: {
-    flexDirection: 'row',
   },
   priceSection: {
     color: '#fff',
