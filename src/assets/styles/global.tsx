@@ -65,3 +65,24 @@ export const DoughnutColor = [
   `#${Math.floor(Math.random() * 16777215).toString(16)}`,
   `#${Math.floor(Math.random() * 16777215).toString(16)}`,
 ];
+
+export const MainStyle = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: ColorsPallete.darkBlue[500],
+    padding: 10,
+  },
+  pageTitle: {
+    fontSize: 40,
+    fontWeight: '600',
+    color: '#fff',
+  },
+  pageSection: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#fff',
+  },
+  informationTitle: {
+    color: ColorsPallete.darkBlue[200],
+  },
+});

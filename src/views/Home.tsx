@@ -7,13 +7,14 @@ import { GroupButtons } from '../components/buttons/GroupButtons';
 import { ProfileHeader } from '../components/ProfileHeader';
 import { CreditCardSection } from '../components/sections/CreditCardSection';
 import { CryotoSection } from '../components/sections/CryptoSection';
+import { LoansSection } from '../components/sections/LoansSection';
 import { CurrenciesService } from '../services/CurrenciesService';
 
 const user = { name: 'Rickson', visibility: false };
 const responseStatus = 'error';
-const groupButtons = ['My Crypto', 'My Card'];
+const groupButtons = ['Crypto', 'Card', 'Loans'];
 
-export function Home() {
+export function Home({ navigation }) {
   useEffect(() => {
     // loadCurrencies();
   });
@@ -21,7 +22,7 @@ export function Home() {
   const [visibility, setVisibility] = useState(user.visibility);
   const [alert, setAlert] = useState(false);
   const [alertStatus, setAlertStatus] = useState(responseStatus);
-  const [groupButtonSelected, setGroupButtonSelected] = useState(0);
+  const [groupButtonSelected, setGroupButtonSelected] = useState(2);
 
   const loadCurrencies = async () => {
     const data = await CurrenciesService.loadCurrencies();
@@ -39,6 +40,21 @@ export function Home() {
     setVisibility(!visibility);
   };
 
+  const openFeature = () => {
+    navigation.navigate('Loans');
+  };
+
+  const generateSection = () => {
+    switch (groupButtonSelected) {
+      case 0:
+        return <CryotoSection />;
+      case 1:
+        return <CreditCardSection />;
+      case 2:
+        return <LoansSection openFeature={openFeature} />;
+    }
+  };
+
   return (
     <>
       <ResponseAlert alert={alert} action={toggleAlert} status={alertStatus} />
@@ -54,11 +70,7 @@ export function Home() {
             select={groupButtonSelected}
             action={index => setGroupButtonSelected(index)}
           />
-          {groupButtonSelected === 0 ? (
-            <CryotoSection />
-          ) : (
-            <CreditCardSection />
-          )}
+          {generateSection()}
         </ScrollView>
       </SafeAreaView>
     </>
