@@ -13,24 +13,27 @@ export function TransactionInfo({ item }) {
         switch (component) {
           case 'touchable':
             return style.pendingButton;
-          default:
+          case 'text':
             return style.pendingButtonText;
         }
+        break;
       case 1:
         switch (component) {
           case 'touchable':
             return style.paidButton;
-          default:
+          case 'text':
             return style.paidButtonText;
         }
+        break;
       case 2:
       case 3:
         switch (component) {
           case 'touchable':
             return style.payNowButton;
-          default:
+          case 'text':
             return style.payNowButtonText;
         }
+        break;
     }
   };
   return (

@@ -17,7 +17,7 @@ const groupButtons = ['Crypto', 'Card', 'Loans'];
 export function Home({ navigation }) {
   useEffect(() => {
     // loadCurrencies();
-  });
+  }, []);
 
   const [visibility, setVisibility] = useState(user.visibility);
   const [alert, setAlert] = useState(false);
