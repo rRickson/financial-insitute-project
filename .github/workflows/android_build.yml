@@ -1,13 +1,13 @@
 name: Android Build
 
 on:
-  workflow_dispatch: 
-  push:
-    branches:
-      - main
+  workflow_dispatch: # To trigger manual build
+  release:
+    types: [published] # only run the workflow when a new release has been published
 
 jobs:
-  job:
+  android-build:
+
     name: Android Build
     runs-on: ubuntu-latest
 
