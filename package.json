@@ -55,10 +55,5 @@
       "json",
       "node"
     ]
-  },
-  "overrides": {
-    "react-native": {
-      "hermes-engine": "0.10.0"
-    }
   }
 }
