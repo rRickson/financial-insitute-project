@@ -1,53 +1,47 @@
 name: Android Build
 
-on:
-  workflow_dispatch: # To trigger manual build
-  release:
-    types: [published] # only run the workflow when a new release has been published
+on: push
 
 jobs:
   android-build:
-
-    name: Android Build
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v2
+    - name: Check out Git repository
+      uses: actions/checkout@v2
 
-      - name: Set up our JDK environment
-        uses: actions/setup-java@v1.4.3
-        with:
-          java-version: 1.8
+    - name: Set up our JDK environment
+      uses: actions/setup-java@v1.4.3
+      with:
+        java-version: 1.8
 
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
+    - name: Install dependencies
+      run: yarn install --frozen-lockfile
 
-      - name: Cache Gradle Wrapper
-        uses: actions/cache@v2
-        with:
-          path: ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+    - name: Cache Gradle Wrapper
+      uses: actions/cache@v2
+      with:
+        path: ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
 
-      - name: Cache Gradle Dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-caches-
+    - name: Cache Gradle Dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.gradle/caches
+        key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-caches-
 
-      - name: Make Gradlew Executable
-        run: cd android && chmod +x ./gradlew
+    - name: Make Gradlew Executable
+      run: cd android && chmod +x ./gradlew
 
-      - name: Generate App APK
-        run: |
-          cd android && ./gradlew assembleRelease --no-daemon
+    - name: Generate App APK
+      run: |
+        cd android && ./gradlew assembleRelease --no-daemon
 
 
-     - name: Create and Upload Artifact
-        uses: actions/upload-artifact@main
-        with:
-          name: android-build-${{ github.sha }}
-          path: |
-            ${{ github.workspace }}/build/${{ matrix.buildtype }}/android/
+    - name: Create and Upload Artifact
+      uses: actions/upload-artifact@main
+      with:
+        name: android-build-${{ github.sha }}
+        path: |
+          ${{ github.workspace }}/build/${{ matrix.buildtype }}/android/
