@@ -44,4 +44,4 @@ jobs:
       with:
         name: android-build-${{ github.sha }}
         path: |
-          ${{ github.workspace }}/build/${{ matrix.buildtype }}/android/
+          ${{ github.workspace }}/android/app/build/outputs/apk/release/
